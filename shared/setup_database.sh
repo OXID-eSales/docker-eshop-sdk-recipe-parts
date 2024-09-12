@@ -21,9 +21,10 @@ flags "$@"
 
 echo -e "\033[1;37m\033[1;42mSetup shop\033[0m\n"
 
-docker compose exec php ${CONSOLE_PATH} oe:setup:shop --db-host=mysql --db-port=3306 --db-name=example --db-user=root \
-  --db-password=root --shop-url=http://localhost.local/ --shop-directory=/var/www/source/ \
-  --compile-directory=/var/www/source/tmp/
+docker compose exec php ${CONSOLE_PATH} oe:setup:shop  --db-host=${MYSQL_HOST:-mysql} --db-port=${MYSQL_PORT:-3306} \
+  --db-name=${MYSQL_DATABASE:-example} --db-user=${MYSQL_USER:-root} --db-password=${MYSQL_ROOT_PASSWORD:-root} \
+  --shop-url=${SHOP_URL:-http://localhost.local/} --shop-directory=${SHOP_DIRECTORY:-/var/www/source/} \
+  --compile-directory=${COMPILE_DIRECTORY:-/var/www/source/tmp/}
 
 $SHARED_SCRIPT_PATH/reset_database.sh
 
