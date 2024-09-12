@@ -1,5 +1,5 @@
-email=noreply@oxid-esales.com
-password=admin
+email=${ADMIN_EMAIL:-noreply@oxid-esales.com}
+password=${ADMIN_PASSWORD:-admin}
 CONSOLE_PATH=$( [ -e "source/bin/oe-console" ] && echo "bin/oe-console" || echo "vendor/bin/oe-console" )
 
 docker compose exec -T php ${CONSOLE_PATH} oe:admin:create --admin-email="$email" --admin-password="$password"
