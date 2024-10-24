@@ -26,4 +26,4 @@ if [ ${giturl+x} ]; then
   docker compose exec php composer config "repositories.${name}" git ${giturl}
 fi
 
-docker compose exec php composer require "${name}:${version}" --no-update
+docker compose exec php composer require --dev "${name}:${version}" --no-update
