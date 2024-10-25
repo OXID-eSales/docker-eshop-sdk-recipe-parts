@@ -12,6 +12,8 @@ while getopts e:b:u: flag; do
   esac
 done
 
+SHARED_SCRIPT_PATH=$(dirname $0)
+
 echo -e "\033[1;37m\033[1;42mRequire demodata package: Edition: ${edition}, Branch: ${branch}\033[0m\n"
 
 if [ -z ${edition+x} ] || [ -z ${branch+x} ]; then
@@ -20,23 +22,13 @@ if [ -z ${edition+x} ] || [ -z ${branch+x} ]; then
 fi
 
 if [ $edition = "CE" ]; then
-  docker compose exec -T \
-    php composer config repositories.oxid-esales/oxideshop-demodata-ce \
-    --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ce"}'
-  docker compose exec -T php composer require oxid-esales/oxideshop-demodata-ce:dev-${branch} --no-update
+  $SHARED_SCRIPT_PATH/require.sh -n"oxid-esales/oxideshop-demodata-ce" -g"https://github.com/OXID-eSales/oxideshop_demodata_ce" -v"dev-${branch}"
 fi
 
 if [ $edition = "PE" ]; then
-  docker compose exec -T \
-    php composer config repositories.oxid-esales/oxideshop-demodata-pe \
-    --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_pe"}'
-  docker compose exec -T php composer require oxid-esales/oxideshop-demodata-pe:dev-${branch} --no-update
+  $SHARED_SCRIPT_PATH/require.sh -n"oxid-esales/oxideshop-demodata-pe" -g"https://github.com/OXID-eSales/oxideshop_demodata_pe" -v"dev-${branch}"
 fi
 
-
 if [ $edition = "EE" ]; then
-  docker compose exec -T \
-    php composer config repositories.oxid-esales/oxideshop-demodata-ee \
-    --json '{"type":"git", "url":"https://github.com/OXID-eSales/oxideshop_demodata_ee"}'
-  docker compose exec -T php composer require oxid-esales/oxideshop-demodata-ee:dev-${branch} --no-update
+  $SHARED_SCRIPT_PATH/require.sh -n"oxid-esales/oxideshop-demodata-ee" -g"https://github.com/OXID-eSales/oxideshop_demodata_ee" -v"dev-${branch}"
 fi
