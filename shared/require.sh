@@ -4,12 +4,14 @@
 # -n full package identifier, like oxid-esales/twig-admin
 # -g git url like https://github.com/OXID-eSales/media-library-module.git
 # -v package version like dev-b-7.0.x or ^v5.3.6
+# -a for no additional params on require
 
-while getopts n:g:v: flag; do
+while getopts n:g:v:a: flag; do
   case "${flag}" in
   n) name=${OPTARG} ;;
   g) giturl=${OPTARG} ;;
   v) version=${OPTARG} ;;
+  a) additional=${OPTARG} ;;
   *) ;;
   esac
 done
@@ -26,4 +28,4 @@ if [ ${giturl+x} ]; then
   docker compose exec php composer config "repositories.${name}" git ${giturl}
 fi
 
-docker compose exec php composer require "${name}:${version}" --no-update
+docker compose exec php composer require "${name}:${version}" --no-update ${additional}

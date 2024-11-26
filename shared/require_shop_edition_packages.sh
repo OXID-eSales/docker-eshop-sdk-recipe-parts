@@ -21,7 +21,7 @@ if [ -z ${edition+x} ] || [ -z ${version+x} ]; then
   exit 1
 fi
 
-$SHARED_SCRIPT_PATH/require.sh -n"oxid-esales/oxideshop-ce" -g"https://github.com/OXID-eSales/oxideshop_ce.git" -v${version}
+$SHARED_SCRIPT_PATH/require.sh -n"oxid-esales/oxideshop-ce" -g"https://github.com/OXID-eSales/oxideshop_ce.git" -v${version} -a"--no-interaction"
 
 if [ $edition = "PE" ]; then
   $SHARED_SCRIPT_PATH/require.sh -n"oxid-esales/oxideshop-pe" -g"https://github.com/OXID-eSales/oxideshop_pe.git" -v${version}

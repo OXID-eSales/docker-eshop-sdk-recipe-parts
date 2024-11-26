@@ -24,7 +24,7 @@ fi
 echo -e "\033[1;37m\033[1;42mEdition: ${edition}, Branch: ${branch}, Dev: ${dev}\033[0m\n"
 
 # Configure twig themes in composer
-$SHARED_SCRIPT_PATH/require.sh -n"oxid-esales/twig-component" -g"https://github.com/OXID-eSales/twig-component" -v"dev-${branch}"
+$SHARED_SCRIPT_PATH/require.sh -n"oxid-esales/twig-component" -g"https://github.com/OXID-eSales/twig-component" -v"dev-${branch}" -a"--no-interaction"
 
 if [ $edition = "PE" ] || [ $edition = "EE" ]; then
   $SHARED_SCRIPT_PATH/require.sh -n"oxid-esales/twig-component-pe" -g"https://github.com/OXID-eSales/twig-component-pe" -v"dev-${branch}"
