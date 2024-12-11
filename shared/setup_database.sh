@@ -30,9 +30,10 @@ fi
 
 docker compose exec -T php sh -c "if [ ! -d '${DIRECTORY_PATH}' ]; then mkdir -p '${DIRECTORY_PATH}'; fi"
 
-docker compose exec php ${CONSOLE_PATH} oe:setup:shop --db-host=mysql --db-port=3306 --db-name=example --db-user=root \
-  --db-password=root --shop-url=http://localhost.local/ --shop-directory=/var/www/source/ \
-  --compile-directory="${DIRECTORY_PATH}/"
+docker compose exec php ${CONSOLE_PATH} oe:setup:shop  --db-host=${MYSQL_HOST:-mysql} --db-port=${MYSQL_PORT:-3306} \
+  --db-name=${MYSQL_DATABASE:-example} --db-user=${MYSQL_USER:-root} --db-password=${MYSQL_ROOT_PASSWORD:-root} \
+  --shop-url=${SHOP_URL:-http://localhost.local/} --shop-directory=${SHOP_DIRECTORY:-/var/www/source/} \
+  --compile-directory="${COMPILE_DIRECTORY:-${DIRECTORY_PATH}}"
 
 $SHARED_SCRIPT_PATH/reset_database.sh
 
