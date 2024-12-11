@@ -28,7 +28,7 @@ else
     DIRECTORY_PATH="/var/www/var/cache"
 fi
 
-docker compose exec -T php sh -c "if [ ! -d '${DIRECTORY_PATH}' ]; then mkdir -p '${DIRECTORY_PATH}'; fi"
+docker compose exec -T php sh -c "if [ ! -d '${COMPILE_DIRECTORY:-${DIRECTORY_PATH}}' ]; then mkdir -p '${COMPILE_DIRECTORY:-${DIRECTORY_PATH}}'; fi"
 
 docker compose exec php ${CONSOLE_PATH} oe:setup:shop  --db-host=${MYSQL_HOST:-mysql} --db-port=${MYSQL_PORT:-3306} \
   --db-name=${MYSQL_DATABASE:-example} --db-user=${MYSQL_USER:-root} --db-password=${MYSQL_ROOT_PASSWORD:-root} \
