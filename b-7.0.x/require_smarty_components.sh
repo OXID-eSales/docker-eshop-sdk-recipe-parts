@@ -10,6 +10,9 @@ while getopts e: flag; do
   esac
 done
 
+# Disable insecure audit checks for smarty v2.x security advisories
+docker compose exec -T php composer config audit.block-insecure false
+
 # Configure smarty components in composer
 docker compose exec -T \
   php composer config repositories.oxid-esales/smarty-component \
